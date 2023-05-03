@@ -1,1 +1,3 @@
 # postmantestcollection
+
+A test collection
