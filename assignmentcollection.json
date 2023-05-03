@@ -1,0 +1,256 @@
+{
+  "info": {
+    "_postman_id": "7f38af16-7bb1-4287-9984-bc74c7a6ec0e",
+    "name": "Assignment",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get request",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "})",
+              "",
+              "",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "default"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "http://api.zippopotam.us/us/12345",
+          "protocol": "http",
+          "host": [
+            "api",
+            "zippopotam",
+            "us"
+          ],
+          "path": [
+            "us",
+            "12345"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Multiple assertions",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "})",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://api.zippopotam.us/us/12345",
+          "protocol": "http",
+          "host": [
+            "api",
+            "zippopotam",
+            "us"
+          ],
+          "path": [
+            "us",
+            "12345"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Asserting first place",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"The response has places\", function() {",
+              "    pm.expect(pm.response.text()).to.include(\"places\");",
+              "});",
+              "",
+              "",
+              "pm.test(\"Response Text\", function () {",
+              "\tpm.expect(pm.response.text()).to.include(\"New York\")",
+              "})",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://api.zippopotam.us/us/12345",
+          "protocol": "http",
+          "host": [
+            "api",
+            "zippopotam",
+            "us"
+          ],
+          "path": [
+            "us",
+            "12345"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Asserting number of places",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var places = pm.response.json().places;",
+              "",
+              "pm.test('Number of places = ' + places.length, function () {",
+              "    pm.expect(places.length).to.equal(1);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://api.zippopotam.us/us/12345",
+          "protocol": "http",
+          "host": [
+            "api",
+            "zippopotam",
+            "us"
+          ],
+          "path": [
+            "us",
+            "12345"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Extracting response values",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var jsonData = JSON.parse(responseBody);",
+              "pm.collectionVariables.set(\"stateAbbreviation\", jsonData[\"places\"][0][\"state abbreviation\"]);",
+              "",
+              "var jsonData = JSON.parse(responseBody);",
+              "pm.collectionVariables.set(\"placeName\", jsonData[\"places\"][0][\"place name\"]);",
+              "//pm.collectionVariables.set(\"variable_key\", \"variable_value\");"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://api.zippopotam.us/us/12345",
+          "protocol": "http",
+          "host": [
+            "api",
+            "zippopotam",
+            "us"
+          ],
+          "path": [
+            "us",
+            "12345"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Using variables",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var places = pm.response.json().places[0][\"place name\"];",
+              "",
+              "pm.test('Number of places = ' + places.length, function () {",
+              "    pm.expect(places.length).to.equal(11);",
+              "});",
+              "",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://api.zippopotam.us/us/{{stateAbbreviation}}/{{placeName}}",
+          "protocol": "http",
+          "host": [
+            "api",
+            "zippopotam",
+            "us"
+          ],
+          "path": [
+            "us",
+            "{{stateAbbreviation}}",
+            "{{placeName}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "stateAbbreviation",
+      "value": ""
+    },
+    {
+      "key": "placeName",
+      "value": ""
+    }
+  ]
+}
