@@ -1,3 +1,3 @@
 # postmantestcollection
 
-A test collection with github action
+A test collection with github action demo
